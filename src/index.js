@@ -1,5 +1,8 @@
-const src = require('./assets/webpack.png');
+import a from './a';
+console.log(a);
+console.log('index');
 
-const img = document.createElement('img');
-img.src = src;
-document.body.appendChild(img);
+
+
+
+
