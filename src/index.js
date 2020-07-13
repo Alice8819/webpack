@@ -1,6 +1,9 @@
-fetch('/api/student/findAll?appkey=Alice_1553846205955')
-.then(res=>res.json()).then(res=>console.log(res))
+// const src = require('./assets/webpack.png').default;
+import src from './assets/webpack.png';
 
+let img = document.createElement('img');
+img.src = src;
+document.body.appendChild(img);
 
 
 

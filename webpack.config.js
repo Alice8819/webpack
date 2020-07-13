@@ -1,6 +1,7 @@
 var path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+
 
 
 module.exports = {
@@ -14,19 +15,24 @@ module.exports = {
 
     ],
     devServer:{
-        // index:'index.html', // 默认   得有一个index.html
-        port:8000,
         open:true,  // 自动打开
-        proxy:{  // 代理规则
-            '/api':{ // /api 用于正则表达式   '/api':'http://open.duyiedu.com'
-            
-                target:'http://open.duyiedu.com', 
-                changeOrigin:true,  // 更改请求头中的host和origin等于target  有些服务器不认地址就认host
+    },
+    stats:{  // 放devServer 外面  也可以
+        colors:true,
+        modules:false,
+    },
+    module:{
+        rules:[
+            {
+                test:/\.(jpg)|(png)|(tif)/g,
+                use:{
+                    loader:'url-loader',
+                    options:{
+                        name:'[name].[hash:5].[ext]',  //  name: 源文件的名字，file-loader里的hash跟contenthash一样，ext:源文件后缀名
+                        limit:100*1024, //只要文件不超过 100*1024 字节，则使用base64编码，否则，交给file-loader进行处理
+                    }
+                }
             }
-        },
-        stats:{  // 放devServer 外面  也可以
-            colors:true,
-            modules:false,
-        }
+        ]
     }
 }
