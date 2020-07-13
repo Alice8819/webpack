@@ -1,7 +1,6 @@
-var a = require('jquery')
-console.log('a模块内容',a)
-console.log('index');
-export var a = 'a'
+fetch('/api/student/findAll?appkey=Alice_1553846205955')
+.then(res=>res.json()).then(res=>console.log(res))
+
 
 
 
