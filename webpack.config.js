@@ -1,9 +1,17 @@
-var ListFilePlugin = require('./plugins/listFilePlugin');
+var webpackProd = require('./webpack.prod');
+var webpackDev = require('./webpack.dev');
+var webpackBase = require('./webpack.base');
 
-module.exports = {
-    mode:'development',
-    devtool:'source-map',
-    plugins:[
-        new ListFilePlugin('111.md'),
-    ]
+module.exports = function (env) {
+    if (env && env.prod) {
+        return {
+            ...webpackProd,
+            ...webpackBase,
+        }
+    } else {
+        return {
+            ...webpackDev,
+            ...webpackBase,
+        }
+    }
 }

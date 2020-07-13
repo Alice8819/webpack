@@ -1,1 +1,3 @@
- export default 1;
+require('@/index')
+console.log('a')
+module.exports = 'a'
