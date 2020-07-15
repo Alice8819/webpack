@@ -1,18 +1,29 @@
-let base = require('./webpack.base');
-let dev = require('./webpack.dev');
-let prod = require('./webpack.prod');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = function (env) {
-    if(env && env.prod){
-        // 生产环境
-        let setObj = {...base,...prod,};
-        setObj.plugins = [...base.plugins,...prod.plugins]
-        return setObj;
-    } else {
-        // 开发环境
-        return {
-            ...base,
-            ...dev,
-        }
-    }
+module.exports = {
+    mode: 'development',
+    devServer: {
+        open: true,
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: ['style-loader',{
+                    loader:"css-loader",
+                    options:{
+                        modules:{
+                            localIdentName:'[path][local]-[hash:base64:5]'
+                        }
+                    }
+                }]
+            }
+        ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: 'public/index.html'
+        })
+    ]
 }
+
