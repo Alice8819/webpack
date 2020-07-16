@@ -1,29 +1,21 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    mode: 'development',
-    devServer: {
-        open: true,
-    },
-    module: {
-        rules: [
+    mode:'development',
+    module:{
+        rules:[
             {
-                test: /\.css$/,
-                use: ['style-loader',{
-                    loader:"css-loader",
-                    options:{
-                        modules:{
-                            localIdentName:'[path][local]-[hash:base64:5]'
-                        }
-                    }
-                }]
+                test:/\.(sss)|(pcss)|(postcss)/,
+                use:['style-loader','css-loader?modules','postcss-loader']
             }
         ]
     },
-    plugins: [
+    plugins:[
         new HtmlWebpackPlugin({
-            template: 'public/index.html'
+            template:'./public/index.html'
         })
-    ]
+    ],
+    devServer:{
+        open:true,
+    }
 }
-
